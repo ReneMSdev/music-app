@@ -1,6 +1,7 @@
 {
   "name": "music-lyrics-translator",
   "version": "0.1.0",
+  "author": "Rene Maxey-Salomone <renems.dev@gmail.com>",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
