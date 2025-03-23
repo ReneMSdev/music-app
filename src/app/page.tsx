@@ -1,19 +1,63 @@
-'use client'
-
 import { Button } from '@/components/ui/button'
-import { LoginForm } from '@/components/login-form'
+import { HomeIcon, UserIcon, LogInIcon } from 'lucide-react'
+import Link from 'next/link'
 
 export default function Home() {
   return (
-    <main className='flex flex-col items-center justify-center min-h-screen p-4 text-center'>
-      <h1 className='text-4xl font-bold mb-4'>Spotify Lyrics Translator</h1>
-      <p className='mb-8'>
-        Translate song lyrics in real time as you listen to your favorite music!
-      </p>
+    <div className='min-h-screen bg-gradient-to-br from-zinc-900 to-black text-white'>
+      {/* Sticky Navbar */}
+      <header className='sticky top-0 z-50 w-full bg-black/70 backdrop-blur border-b border-zinc-800 shadow-md'>
+        <div className='mx-auto flex items-center justify-between px-6 py-4 max-w-7xl'>
+          <h1 className='text-2xl font-bold tracking-tight transition-all duration-300 bg-gradient-to-t from-red-700 to-orange-400 bg-clip-text text-transparent hover:drop-shadow-[0_0_10px_#f97316]'>
+            YourSound<span className='text-sm align-top ml-1'>™</span>
+          </h1>
+          <nav className='flex items-center gap-6'>
+            <Link
+              href='/'
+              className='text-amber-300 flex items-center gap-1 hover:text-amber-400'
+            >
+              <HomeIcon className='w-5 h-5' /> <span>Home</span>
+            </Link>
+            <Link
+              href='/profile'
+              className='text-amber-300 flex items-center gap-1 hover:text-amber-400'
+            >
+              <UserIcon className='w-5 h-5' /> <span>Profile</span>
+            </Link>
+            <Button
+              asChild
+              variant='secondary'
+              className='text-white border-white hover:bg-lime-500'
+            >
+              <Link
+                href='/login'
+                className='bg-gradient-to-t from-red-700 to-orange-400 flex items-center gap-1'
+              >
+                <LogInIcon className='w-4 h-4' /> <span>Login</span>
+              </Link>
+            </Button>
+          </nav>
+        </div>
+      </header>
 
-      <div className='w-full max-w-md mb-8'>
-        <LoginForm />
-      </div>
-    </main>
+      {/* Hero Section */}
+      <section
+        className='relative w-full min-h-[calc(100vh-72px)] bg-cover bg-center px-6 pt-[150px] flex justify-center text-center'
+        style={{ backgroundImage: "url('/img/hero.jpg')" }}
+      >
+        <div className='p-6 rounded-xl max-w-3xl'>
+          <h2 className='text-4xl md:text-5xl font-extrabold mb-4'>The world of music is yours!</h2>
+          <h3 className='font-bold text-lg md:text-xl text-zinc-300 mb-8 italic'>
+            Translate any song. Understand every verse
+          </h3>
+          <Button
+            size='lg'
+            className='bg-gradient-to-t from-red-700 to-orange-400 text-white font-semibold hover:brightness-110'
+          >
+            Get Started
+          </Button>
+        </div>
+      </section>
+    </div>
   )
 }
