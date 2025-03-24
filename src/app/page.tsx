@@ -58,7 +58,7 @@ export default function Home() {
             size='lg'
             className='w-64 bg-gradient-to-t from-red-700 to-orange-400 text-white font-extrabold hover:brightness-110 cursor-pointer'
           >
-            <Link href={'/login'}>Get The Party Started</Link>
+            <Link href={'/signup'}>Get The Party Started</Link>
           </Button>
         </div>
       </section>
