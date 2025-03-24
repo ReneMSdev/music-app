@@ -3,6 +3,23 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { signup } from '@/lib/auth'
+import { toast } from 'react-toastify'
+import Link from 'next/link'
+
+const handleSignUp = async (e: React.FormEvent) => {
+  e.preventDefault()
+
+  const form = e.currentTarget as HTMLFormElement
+  const name = (form.elements.namedItem('name') as HTMLInputElement).value
+  const email = (form.elements.namedItem('email') as HTMLInputElement).value
+  const password = (form.elements.namedItem('password') as HTMLInputElement).value
+
+  const { error } = await signup(name, email, password)
+
+  if (error) toast.error(error.message)
+  else toast.success('Check your email to confirm your account ✉️')
+}
 
 export function SignUpForm({ className, ...props }: React.ComponentProps<'div'>) {
   return (
@@ -17,7 +34,7 @@ export function SignUpForm({ className, ...props }: React.ComponentProps<'div'>)
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <form>
+          <form onSubmit={handleSignUp}>
             <div className='flex flex-col gap-7'>
               <div className='grid gap-3'>
                 <Label
@@ -87,12 +104,12 @@ export function SignUpForm({ className, ...props }: React.ComponentProps<'div'>)
             </div>
             <div className='mt-6 mb-2 text-center text-sm'>
               Already have an account?{' '}
-              <a
-                href='#'
+              <Link
+                href='/login'
                 className='font-bold underline decoration-2 underline-offset-5 hover:text-orange-500'
               >
                 Login
-              </a>
+              </Link>
             </div>
           </form>
         </CardContent>
