@@ -1,8 +1,21 @@
+'use client'
+
+import { useEffect, useState } from 'react'
+import { supabase } from '@/lib/supabase'
+
 import { Button } from '@/components/ui/button'
 import { HomeIcon, UserIcon, LogInIcon } from 'lucide-react'
 import Link from 'next/link'
 
 export default function Home() {
+  const [user, setUser] = useState(null)
+
+  useEffect(() => {
+    const getUser = async () => {
+      const { data, error } = await supabase.auth.getUser()
+    }
+  })
+
   return (
     <div className='min-h-screen bg-gradient-to-br from-zinc-900 to-black text-white'>
       {/* Sticky Navbar */}

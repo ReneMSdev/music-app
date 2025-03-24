@@ -1,5 +1,6 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -13,6 +14,7 @@ import { Spinner } from '@/components/ui/spinner'
 
 export function SignUpForm({ className, ...props }: React.ComponentProps<'div'>) {
   const [loading, setLoading] = useState(false)
+  const router = useRouter()
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -23,15 +25,15 @@ export function SignUpForm({ className, ...props }: React.ComponentProps<'div'>)
     const email = (form.elements.namedItem('email') as HTMLInputElement).value
     const password = (form.elements.namedItem('password') as HTMLInputElement).value
 
-    // Simulate delay for testing
-    await new Promise((resolve) => setTimeout(resolve, 4000))
-
     const { error } = await signup(name, email, password)
 
     setLoading(false)
 
     if (error) toast.error(error.message)
-    else toast.success('Check your email to confirm your account ✉️')
+    else {
+      toast.success('Check your email to confirm your account ✉️')
+      router.push('/')
+    }
   }
 
   return loading ? (
@@ -99,7 +101,8 @@ export function SignUpForm({ className, ...props }: React.ComponentProps<'div'>)
               <div className='flex flex-col gap-3 mt-3'>
                 <Button
                   type='submit'
-                  className='w-full font-bold bg-slate-500 hover:bg-slate-600 cursor-pointer'
+                  disabled={loading}
+                  className='w-full font-bold bg-slate-500 hover:bg-slate-600 cursor-pointer disabled:opacity-50'
                 >
                   Sign Up
                 </Button>
