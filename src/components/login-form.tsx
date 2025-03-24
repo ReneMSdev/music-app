@@ -5,9 +5,35 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { useState } from 'react'
+import { Spinner } from '@/components/ui/spinner'
+import { toast } from 'react-toastify'
+import { login } from '@/lib/auth'
 
 export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) {
-  return (
+  const [loading, setLoading] = useState(false)
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setLoading(true)
+
+    const form = e.currentTarget as HTMLFormElement
+    const email = (form.elements.namedItem('email') as HTMLInputElement).value
+    const password = (form.elements.namedItem('password') as HTMLInputElement).value
+
+    const { error } = await login(email, password)
+
+    setLoading(false)
+
+    if (error) toast.error(error.message)
+    else toast.success('Welcome Back')
+  }
+
+  return loading ? (
+    <div className='flex h-screen w-full items-center justify-center bg-black'>
+      <Spinner size='xxl' />
+    </div>
+  ) : (
     <div
       className={cn('flex flex-col gap-6', className)}
       {...props}
@@ -19,7 +45,7 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) 
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <form>
+          <form onSubmit={handleLogin}>
             <div className='flex flex-col gap-7'>
               <div className='grid gap-3'>
                 <Label

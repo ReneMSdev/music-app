@@ -8,23 +8,37 @@ import { Label } from '@/components/ui/label'
 import { signup } from '@/lib/auth'
 import { toast } from 'react-toastify'
 import Link from 'next/link'
-
-const handleSignUp = async (e: React.FormEvent) => {
-  e.preventDefault()
-
-  const form = e.currentTarget as HTMLFormElement
-  const name = (form.elements.namedItem('name') as HTMLInputElement).value
-  const email = (form.elements.namedItem('email') as HTMLInputElement).value
-  const password = (form.elements.namedItem('password') as HTMLInputElement).value
-
-  const { error } = await signup(name, email, password)
-
-  if (error) toast.error(error.message)
-  else toast.success('Check your email to confirm your account ✉️')
-}
+import { useState } from 'react'
+import { Spinner } from '@/components/ui/spinner'
 
 export function SignUpForm({ className, ...props }: React.ComponentProps<'div'>) {
-  return (
+  const [loading, setLoading] = useState(false)
+
+  const handleSignUp = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setLoading(true)
+
+    const form = e.currentTarget as HTMLFormElement
+    const name = (form.elements.namedItem('name') as HTMLInputElement).value
+    const email = (form.elements.namedItem('email') as HTMLInputElement).value
+    const password = (form.elements.namedItem('password') as HTMLInputElement).value
+
+    // Simulate delay for testing
+    await new Promise((resolve) => setTimeout(resolve, 4000))
+
+    const { error } = await signup(name, email, password)
+
+    setLoading(false)
+
+    if (error) toast.error(error.message)
+    else toast.success('Check your email to confirm your account ✉️')
+  }
+
+  return loading ? (
+    <div className='flex h-screen items-center justify-center bg-black'>
+      <Spinner size='xxl' />
+    </div>
+  ) : (
     <div
       className={cn('flex flex-col gap-6', className)}
       {...props}
