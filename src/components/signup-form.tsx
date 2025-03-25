@@ -37,7 +37,7 @@ export function SignUpForm({ className, ...props }: React.ComponentProps<'div'>)
   }
 
   return loading ? (
-    <div className='flex h-screen items-center justify-center bg-black'>
+    <div className='flex h-screen w-screen items-center justify-center bg-black'>
       <Spinner size='xxl' />
     </div>
   ) : (
