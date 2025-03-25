@@ -6,7 +6,7 @@ import Link from 'next/link'
 export function LandingHero() {
   return (
     <section
-      className='relative w-full min-h-[calc(100vh-72px)] bg-cover bg-center px-6 pt-[130px] flex justify-center text-center'
+      className='mt-9 relative w-full min-h-[100vh] bg-cover bg-center px-6 pt-[130px] flex justify-center text-center'
       style={{ backgroundImage: "url('/img/hero.jpg')" }}
     >
       <div className='p-6 rounded-xl max-w-3xl'>

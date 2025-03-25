@@ -30,15 +30,15 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) 
   }
 
   return loading ? (
-    <div className='flex h-screen w-full items-center justify-center bg-black'>
+    <div className='flex h-screen w-full items-center justify-center'>
       <Spinner size='xxl' />
     </div>
   ) : (
     <div
-      className={cn('flex flex-col gap-6', className)}
+      className={cn('flex flex-col items-center px-4', className)}
       {...props}
     >
-      <Card className='bg-slate-900 text-white border-2 border-orange-500'>
+      <Card className='w-full bg-slate-900 text-white border-2 border-orange-500'>
         <CardHeader>
           <CardTitle className='text-center text-2xl font-extrabold '>
             Login to your account

@@ -17,7 +17,7 @@ export default function Navbar() {
   }
 
   return (
-    <header className='sticky top-0 z-50 w-full bg-slate-900 backdrop-blur shadow-md'>
+    <header className='fixed top-0 z-50 w-full bg-slate-900 backdrop-blur shadow-md'>
       <div className='mx-auto flex items-center justify-between px-6 py-4 max-w-7xl'>
         <Link
           href='/'
@@ -42,15 +42,10 @@ export default function Navbar() {
           {user ? (
             <Button
               onClick={handleLogout}
+              className='bg-gradient-to-t from-red-700 to-orange-400 flex items-center gap-1 hover:brightness-130 text-white'
               variant='secondary'
-              className='text-white'
             >
-              <Link
-                href='/login'
-                className='bg-gradient-to-t from-red-700 to-orange-400 flex items-center gap-1 hover:brightness-130'
-              >
-                <LogOutIcon className='w-4 mr-1' /> Logout
-              </Link>
+              <LogOutIcon className='w-4 h-4' /> <span>Logout</span>
             </Button>
           ) : (
             <Button
