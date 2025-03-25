@@ -9,9 +9,11 @@ import { useState } from 'react'
 import { Spinner } from '@/components/ui/spinner'
 import { toast } from 'react-toastify'
 import { login } from '@/lib/auth'
+import { useRouter } from 'next/navigation'
 
 export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) {
   const [loading, setLoading] = useState(false)
+  const router = useRouter()
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -26,7 +28,9 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) 
     setLoading(false)
 
     if (error) toast.error(error.message)
-    else toast.success('Welcome Back')
+    else {
+      router.push('/loggedin')
+    }
   }
 
   return loading ? (
