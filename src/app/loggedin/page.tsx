@@ -11,7 +11,7 @@ export default function LoggedInHome() {
         <h1 className='text-5xl font-extrabold text-lime-400 animate:pulse'>
           NOW YOU&apos;RE IN 🎧🔥
         </h1>
-        {user && <p className='text-xl'>Welcome, {user.user_metadata?.name || user.email}!</p>}
+        {user && <h2 className='text-2xl'>Welcome, {user.user_metadata?.name || user.email}!</h2>}
       </div>
     </div>
   )
