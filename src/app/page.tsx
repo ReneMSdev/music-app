@@ -1,6 +1,6 @@
 'use client'
 
-import AppLayout from '@/components/layout'
+import AppLayout from '@/components/layout/AppLayout'
 import { LandingHero } from '@/components/landing/LandingHero'
 
 export default function Home() {
