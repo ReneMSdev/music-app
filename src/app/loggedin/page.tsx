@@ -15,13 +15,17 @@ export default function LoggedInHome() {
   // show nothing or a loading indicator while checking auth
   if (!user) return null
 
+  console.log('User metadata:', user?.user_metadata)
+
   return (
     <div className='min-h-screen bg-stone-900 text-white flex mt-[200px] justify-center px-4'>
       <div className='text-center space-y-4'>
         <h1 className='text-5xl font-extrabold text-lime-400 animate:pulse'>
           NOW YOU&apos;RE IN 🎧🔥
         </h1>
-        {user && <h2 className='text-2xl'>Welcome, {user.user_metadata?.name || user.email}!</h2>}
+        {user && (
+          <h2 className='text-2xl'>Welcome, {user.user_metadata?.full_name || user.email}!</h2>
+        )}
       </div>
     </div>
   )

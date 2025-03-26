@@ -42,7 +42,7 @@ export default function Navbar() {
           {user ? (
             <Button
               onClick={handleLogout}
-              className='bg-gradient-to-t from-red-700 to-orange-400 flex items-center gap-1 hover:brightness-130 text-white'
+              className='bg-gradient-to-t from-red-700 to-orange-400 flex items-center gap-1 hover:brightness-130 text-white cursor-pointer'
               variant='secondary'
             >
               <LogOutIcon className='w-4 h-4' /> <span>Logout</span>
@@ -55,7 +55,7 @@ export default function Navbar() {
             >
               <Link
                 href='/login'
-                className='bg-gradient-to-t from-red-700 to-orange-400 flex items-center gap-1 hover:brightness-130'
+                className='bg-gradient-to-t from-red-700 to-orange-400 flex items-center gap-1 hover:brightness-130 cursor-pointer'
               >
                 <LogInIcon className='w-4 h-4' /> <span>Login</span>
               </Link>
