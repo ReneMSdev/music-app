@@ -10,14 +10,16 @@ export function LandingHero() {
       style={{ backgroundImage: "url('/img/hero.jpg')" }}
     >
       <div className='p-6 rounded-xl max-w-3xl'>
-        <h2 className='text-5xl md:text-5xl font-extrabold mb-6'>The world of music is yours!</h2>
-        <h3 className='font-bold text-xl md:text-2xl text-zinc-300 mb-9 italic'>
+        <h2 className='text-5xl md:text-5xl font-extrabold mb-6 text-slate-200'>
+          The world of music is yours!
+        </h2>
+        <h3 className='font-bold text-xl md:text-2xl text-slate-300 mb-9 italic'>
           Translate any song. Understand every verse.
         </h3>
         <Button
           asChild
           size='lg'
-          className='w-64 bg-gradient-to-t from-red-700 to-orange-400 text-white font-extrabold hover:brightness-110 cursor-pointer'
+          className='w-64 bg-gradient-to-t from-red-700 to-orange-400 text-md text-white font-extrabold hover:brightness-110 cursor-pointer'
         >
           <Link href={'/signup'}>Get The Party Started</Link>
         </Button>
