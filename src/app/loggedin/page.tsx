@@ -13,7 +13,6 @@ export default function LoggedInHome() {
     if (!loading && !user) router.push('/login')
   }, [user, loading, router])
 
-  // show nothing or a loading indicator while checking auth
   if (loading) return <LoadingSpinner />
 
   console.log('User metadata:', user?.user_metadata)

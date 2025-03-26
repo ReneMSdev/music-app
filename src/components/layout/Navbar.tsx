@@ -14,6 +14,7 @@ export default function Navbar() {
   const handleLogout = async () => {
     await supabase.auth.signOut()
     router.push('/')
+    window.location.href = '/' // hard reload to go back to LandingHero
   }
 
   return (
