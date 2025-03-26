@@ -29,7 +29,7 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) 
 
     if (error) toast.error(error.message)
     else {
-      router.push('/loggedin')
+      router.push('/')
     }
   }
 

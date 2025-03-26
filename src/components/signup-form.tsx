@@ -32,7 +32,7 @@ export function SignUpForm({ className, ...props }: React.ComponentProps<'div'>)
     if (error) toast.error(error.message)
     else {
       toast.success('Check your email to confirm your account ✉️')
-      router.push('/loggedin')
+      router.push('/')
     }
   }
 
