@@ -3,6 +3,7 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useUser } from '@/lib/user-context'
+import { LoadingSpinner } from '@/components/ui/loading-spinner'
 
 export default function LoggedInHome() {
   const { user, loading } = useUser()
@@ -13,7 +14,7 @@ export default function LoggedInHome() {
   }, [user, loading, router])
 
   // show nothing or a loading indicator while checking auth
-  if (loading) return null
+  if (loading) return <LoadingSpinner />
 
   console.log('User metadata:', user?.user_metadata)
 

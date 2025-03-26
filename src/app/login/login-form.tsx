@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useState } from 'react'
-import { Spinner } from '@/components/ui/spinner'
+import { LoadingSpinner } from '@/components/ui/loading-spinner'
 import { toast } from 'react-toastify'
 import { login } from '@/lib/auth'
 import { useRouter } from 'next/navigation'
@@ -34,9 +34,7 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) 
   }
 
   return loading ? (
-    <div className='flex h-screen w-full items-center justify-center'>
-      <Spinner size='xxl' />
-    </div>
+    <LoadingSpinner />
   ) : (
     <div
       className={cn('mt-[80px] flex flex-col items-center px-4', className)}

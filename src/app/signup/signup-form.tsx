@@ -10,7 +10,7 @@ import { signup } from '@/lib/auth'
 import { toast } from 'react-toastify'
 import Link from 'next/link'
 import { useState } from 'react'
-import { Spinner } from '@/components/ui/spinner'
+import { LoadingSpinner } from '@/components/ui/loading-spinner'
 
 export function SignUpForm({ className, ...props }: React.ComponentProps<'div'>) {
   const [loading, setLoading] = useState(false)
@@ -37,9 +37,7 @@ export function SignUpForm({ className, ...props }: React.ComponentProps<'div'>)
   }
 
   return loading ? (
-    <div className='flex h-screen w-full items-center justify-center'>
-      <Spinner size='xxl' />
-    </div>
+    <LoadingSpinner />
   ) : (
     <div
       className={cn('mt-[80px] flex flex-col items-center  px-4', className)}

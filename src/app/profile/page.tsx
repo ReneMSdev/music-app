@@ -4,6 +4,7 @@ import { useUser } from '@/lib/user-context'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import ProfileCard from './ProfileCard'
+import { LoadingSpinner } from '@/components/ui/loading-spinner'
 
 export default function ProfilePage() {
   const { user, loading } = useUser()
@@ -13,7 +14,7 @@ export default function ProfilePage() {
     if (!loading && !user) router.push('/login')
   }, [user, loading, router])
 
-  if (!user) return null // or loading spinner
+  if (loading) return <LoadingSpinner />
 
   return (
     <>
