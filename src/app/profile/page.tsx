@@ -6,12 +6,12 @@ import { useEffect } from 'react'
 import ProfileCard from './ProfileCard'
 
 export default function ProfilePage() {
-  const { user } = useUser()
+  const { user, loading } = useUser()
   const router = useRouter()
 
   useEffect(() => {
-    if (user === null) router.push('/login')
-  }, [user, router])
+    if (!loading && !user) router.push('/login')
+  }, [user, loading, router])
 
   if (!user) return null // or loading spinner
 

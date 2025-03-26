@@ -5,15 +5,15 @@ import { useRouter } from 'next/navigation'
 import { useUser } from '@/lib/user-context'
 
 export default function LoggedInHome() {
-  const { user } = useUser()
+  const { user, loading } = useUser()
   const router = useRouter()
 
   useEffect(() => {
-    if (user === null) router.push('/login')
-  }, [user, router])
+    if (!loading && !user) router.push('/login')
+  }, [user, loading, router])
 
   // show nothing or a loading indicator while checking auth
-  if (!user) return null
+  if (loading) return null
 
   console.log('User metadata:', user?.user_metadata)
 
