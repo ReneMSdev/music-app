@@ -42,7 +42,7 @@ export function SignUpForm({ className, ...props }: React.ComponentProps<'div'>)
     </div>
   ) : (
     <div
-      className={cn(' flex flex-col items-center justify-center min-h-screen  px-4', className)}
+      className={cn('mt-[80px] flex flex-col items-center  px-4', className)}
       {...props}
     >
       <Card className='w-full bg-slate-900 text-white border-2 border-orange-500'>
