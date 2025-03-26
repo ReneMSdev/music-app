@@ -53,7 +53,7 @@ export function SignUpForm({ className, ...props }: React.ComponentProps<'div'>)
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSignUp}>
-            <div className='flex flex-col gap-7'>
+            <div className='flex flex-col gap-4'>
               <div className='grid gap-3'>
                 <Label
                   htmlFor='name'
@@ -98,7 +98,7 @@ export function SignUpForm({ className, ...props }: React.ComponentProps<'div'>)
                   required
                 />
               </div>
-              <div className='flex flex-col gap-3 mt-3'>
+              <div className='flex flex-col gap-3 mt-1'>
                 <Button
                   type='submit'
                   disabled={loading}
@@ -106,6 +106,7 @@ export function SignUpForm({ className, ...props }: React.ComponentProps<'div'>)
                 >
                   Sign Up
                 </Button>
+                <h2 className='my-2'>Or sign up with one of the following:</h2>
                 <Button
                   className='w-full text-white font-bold bg-green-500 hover:bg-green-600 cursor-pointer'
                   asChild

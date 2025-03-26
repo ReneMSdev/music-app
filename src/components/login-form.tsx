@@ -50,7 +50,7 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) 
         </CardHeader>
         <CardContent>
           <form onSubmit={handleLogin}>
-            <div className='flex flex-col gap-7'>
+            <div className='flex flex-col gap-4'>
               <div className='grid gap-3'>
                 <Label
                   className='font-bold'
@@ -87,13 +87,14 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) 
                   required
                 />
               </div>
-              <div className='flex flex-col gap-3 mt-3'>
+              <div className='flex flex-col gap-3 mt-1'>
                 <Button
                   type='submit'
                   className='w-full font-bold bg-slate-500 hover:bg-slate-600 cursor-pointer'
                 >
                   Login
                 </Button>
+                <h2 className='my-2'>Or login with one of the following:</h2>
                 <Button
                   className='w-full text-white font-bold bg-green-500 hover:bg-green-600 cursor-pointer'
                   asChild
