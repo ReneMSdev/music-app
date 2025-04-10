@@ -28,6 +28,7 @@ export default function ProfileCard() {
       return
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const updates: any = {
       email,
       data: {
