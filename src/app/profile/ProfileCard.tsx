@@ -93,7 +93,9 @@ export default function ProfileCard() {
             />
           </div>
           <div>
-            <label className='block text-md font-bold mb-2'>Current Password</label>
+            <label className='block text-md font-bold mb-2'>
+              {editMode ? 'New Password' : 'Current Password'}
+            </label>
             <div className='relative'>
               <Input
                 type={'password'}
