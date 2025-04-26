@@ -24,5 +24,25 @@ export async function GET(request: NextRequest) {
 
   const tokenData = await tokenRes.json()
 
-  return NextResponse.json(tokenData)
+  if (
+    tokenData.error ||
+    !tokenData.access_token ||
+    !tokenData.refresh_token ||
+    !tokenData.expires_in
+  ) {
+    // Handle potential errors from Spotify or missing token data
+    console.error('Spotify token error:', tokenData)
+    // Redirect to an error page or back to login with an error message
+    const errorUrl = new URL('/login', request.url)
+    errorUrl.searchParams.set('error', 'spotify_token_error')
+    return NextResponse.redirect(errorUrl)
+  }
+
+  // Construct the redirect URL with tokens as search parameters
+  const redirectUrl = new URL('/loggedin', request.url)
+  redirectUrl.searchParams.set('access_token', tokenData.access_token)
+  redirectUrl.searchParams.set('refresh_token', tokenData.refresh_token)
+  redirectUrl.searchParams.set('expires_in', tokenData.expires_in.toString()) // Ensure it's a string
+
+  return NextResponse.redirect(redirectUrl)
 }
