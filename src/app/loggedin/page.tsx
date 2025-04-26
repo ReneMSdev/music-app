@@ -45,6 +45,52 @@ export default function LoggedInHome() {
     }
   }, [searchParams, setUser, router, user, loading, tokensProcessed])
 
+  useEffect(() => {
+    if (!loading && user) {
+      // We only need refresh token and expiry to check if refresh is needed
+      const { spotify_refresh_token, spotify_expires_at } = user.user_metadata || {}
+
+      if (spotify_refresh_token && spotify_expires_at && Date.now() >= spotify_expires_at) {
+        console.log('Spotify access token expired. Refreshing...')
+
+        const refreshSpotifyToken = async () => {
+          try {
+            const res = await fetch('/api/spotify/refresh', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ refresh_token: spotify_refresh_token }),
+            })
+
+            const tokenData = await res.json()
+
+            if (tokenData.access_token) {
+              console.log('New Spotify access token received')
+
+              setUser((prev) => {
+                if (!prev) return null
+                return {
+                  ...prev,
+                  user_metadata: {
+                    ...(prev.user_metadata ?? {}),
+                    spotify_access_token: tokenData.access_token,
+                    spotify_expires_at: Date.now() + tokenData.expires_in * 1000, // typically 3600 seconds
+                    // If Spotify gives back a new refresh_token (rare), update it too
+                    ...(tokenData.refresh_token && {
+                      spotify_refresh_token: tokenData.refresh_token,
+                    }),
+                  },
+                }
+              })
+            }
+          } catch (error) {
+            console.error('Error refreshing Spotify token:', error)
+          }
+        }
+
+        refreshSpotifyToken()
+      }
+    }
+  }, [user, loading, setUser])
   if (loading) return <LoadingSpinner />
 
   const handleSpotifyConnect = () => {
@@ -59,7 +105,7 @@ export default function LoggedInHome() {
         )}
 
         {user?.user_metadata?.spotify_access_token && (
-          <h1 className='text-4xl font-bold text-green-400 mt-6 animate-pulse'>
+          <h1 className='text-4xl font-bold text-green-400 mt-6'>
             ✅ Spotify Connected Successfully!
           </h1>
         )}
