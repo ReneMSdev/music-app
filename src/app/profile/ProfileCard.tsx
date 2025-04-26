@@ -58,7 +58,7 @@ export default function ProfileCard() {
 
   return (
     <div className='flex justify-center mt-12 px-4'>
-      <Card className='w-full max-w-md bg-slate-900 text-slate-300 border-2 border-orange-500'>
+      <Card className='w-full max-w-md bg-slate-900 text-slate-300 border-2 border-orange-500 py-6'>
         <CardHeader>
           <CardTitle className='text-3xl'>Profile</CardTitle>
           <div className='flex flex-col items-center gap-4'>
