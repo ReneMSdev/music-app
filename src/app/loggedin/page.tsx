@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { useUser } from '@/lib/user-context'
 import { LoadingSpinner } from '@/components/ui/loading-spinner'
 import { Button } from '@/components/ui/button'
+import { RecentlyPlayed } from '@/components/spotify/RecentlyPlayed' // Import the new component
 
 export default function LoggedInHome() {
   const { user, setUser, loading } = useUser()
@@ -105,11 +106,17 @@ export default function LoggedInHome() {
         )}
 
         {user?.user_metadata?.spotify_access_token && (
-          <h1 className='text-4xl font-bold text-green-400 mt-6'>
-            ✅ Spotify Connected Successfully!
-          </h1>
+          <>
+            <h1 className='text-4xl font-bold text-green-400 mt-6 mb-8'>
+              {' '}
+              {/* Added margin-bottom */}✅ Spotify Connected Successfully!
+            </h1>
+            {/* Render the RecentlyPlayed component, passing the token */}
+            <RecentlyPlayed accessToken={user.user_metadata.spotify_access_token} />
+          </>
         )}
 
+        {/* Show connect button only if token doesn't exist */}
         {!user?.user_metadata?.spotify_access_token && (
           <div className='mt-8 space-y-5'>
             <p className='text-lg text-red-400 font-semibold'>

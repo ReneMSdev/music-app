@@ -10,6 +10,8 @@ export async function GET() {
     'user-read-playback-state',
     'user-modify-playback-state',
     'streaming',
+    'user-read-currently-playing',
+    'user-read-recently-played',
   ]
 
   const params = new URLSearchParams({
