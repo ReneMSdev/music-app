@@ -99,18 +99,10 @@ export default function LoggedInHome() {
   }
 
   return (
-    <div className='min-h-screen bg-stone-900 text-white flex flex-col items-center mt-40'>
+    <div className='min-h-screen bg-stone-900 text-white flex flex-col items-center mt-25'>
       <div className='text-center space-y-4'>
-        {user && (
-          <h2 className='text-2xl'>Welcome, {user.user_metadata?.full_name || user.email}!</h2>
-        )}
-
         {user?.user_metadata?.spotify_access_token && (
           <>
-            <h1 className='text-4xl font-bold text-green-400 mt-6 mb-8'>
-              {' '}
-              {/* Added margin-bottom */}✅ Spotify Connected Successfully!
-            </h1>
             {/* Render the RecentlyPlayed component, passing the token */}
             <RecentlyPlayed accessToken={user.user_metadata.spotify_access_token} />
           </>

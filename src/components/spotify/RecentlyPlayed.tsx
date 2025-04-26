@@ -94,23 +94,22 @@ export function RecentlyPlayed({ accessToken }: { accessToken: string }) {
   }
 
   return (
-    <div className='w-full max-w-6xl mx-auto p-4'>
+    <div className='w-full max-w-4xl mx-auto p-4'>
       <h2 className='text-2xl font-semibold mb-4 text-white'>Recently Played</h2>
       <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4'>
-        {tracks.map((track) => (
+        {tracks.slice(0, 10).map((track) => (
           <Card
             key={track.id}
-            className='bg-slate-800 border-slate-700 text-white overflow-hidden hover:bg-slate-700 transition duration-200'
+            className='bg-slate-800 border-slate-700 text-white  overflow-hidden hover:bg-slate-700 transition duration-200 rounded-lg'
           >
-            <CardContent className='flex flex-col p-0'>
-              {/* Use aspect-square for consistent image sizing */}
-              <div className='aspect-square w-full overflow-hidden'>
+            <CardContent className='flex flex-col !p-0 cursor-pointer'>
+              <div className='w-full'>
                 <img
-                  src={track.album.images?.[0]?.url || '/placeholder-image.png'} // Provide a fallback image
-                  alt={track.album.name} // Use album name for alt text
-                  className='w-full h-full object-cover'
-                  width={300} // Add width/height for performance
-                  height={300}
+                  src={track.album.images?.[0]?.url || '/placeholder-image.png'}
+                  alt={track.album.name}
+                  className='w-full h-auto aspect-square object-cover rounded-t-lg'
+                  width={200}
+                  height={200}
                 />
               </div>
               <div className='p-3'>
