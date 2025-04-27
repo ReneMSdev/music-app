@@ -1,7 +1,8 @@
 'use client'
 
 import { createContext, useContext, useEffect, useState } from 'react'
-import { User } from '@supabase/supabase-js'
+import { User, Session } from '@supabase/supabase-js'
+import { supabase } from './supabase'
 
 type UserContextType = {
   user: User | null
@@ -20,17 +21,22 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const fakeUser = {
-      id: '123',
-      email: 'test@example.com',
-      user_metadata: {
-        full_name: 'Test User',
-        avatar_url: 'https://example.com/avatar.png',
-      },
-    } as any // eslint-disable-line @typescript-eslint/no-explicit-any
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event, session) => {
+      setUser(session?.user ?? null)
+      setLoading(false)
+    })
 
-    setUser(fakeUser)
-    setLoading(false)
+    // Check existing session
+    supabase.auth
+      .getSession()
+      .then(({ data: { session } }: { data: { session: Session | null } }) => {
+        setUser(session?.user ?? null)
+        setLoading(false)
+      })
+
+    return () => subscription?.unsubscribe()
   }, [])
 
   return <UserContext.Provider value={{ user, setUser, loading }}>{children}</UserContext.Provider>

@@ -1,4 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { createClient } from '@supabase/supabase-js'
+
+const supabaseAdmin = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY! // not anon key
+)
 
 export async function GET(request: NextRequest) {
   const code = request.nextUrl.searchParams.get('code')
@@ -7,9 +13,10 @@ export async function GET(request: NextRequest) {
   const client_id = process.env.SPOTIFY_CLIENT_ID!
   const client_secret = process.env.SPOTIFY_CLIENT_SECRET!
   const redirect_uri = process.env.SPOTIFY_REDIRECT_URI!
+
   const basicAuth = Buffer.from(`${client_id}:${client_secret}`).toString('base64')
 
-  const tokenRes = await fetch('https://accounts.spotify.com/api/token', {
+  const response = await fetch('https://accounts.spotify.com/api/token', {
     method: 'POST',
     headers: {
       Authorization: `Basic ${basicAuth}`,
@@ -22,27 +29,51 @@ export async function GET(request: NextRequest) {
     }),
   })
 
-  const tokenData = await tokenRes.json()
+  const tokenData = await response.json()
 
-  if (
-    tokenData.error ||
-    !tokenData.access_token ||
-    !tokenData.refresh_token ||
-    !tokenData.expires_in
-  ) {
-    // Handle potential errors from Spotify or missing token data
-    console.error('Spotify token error:', tokenData)
-    // Redirect to an error page or back to login with an error message
-    const errorUrl = new URL('/login', request.url)
-    errorUrl.searchParams.set('error', 'spotify_token_error')
-    return NextResponse.redirect(errorUrl)
+  if (!tokenData.access_token) {
+    console.error('Failed to get access token:', tokenData)
+    return NextResponse.redirect('http://localhost:3000/login?error=spotify')
   }
 
-  // Construct the redirect URL with tokens as search parameters
-  const redirectUrl = new URL('/loggedin', request.url)
-  redirectUrl.searchParams.set('access_token', tokenData.access_token)
-  redirectUrl.searchParams.set('refresh_token', tokenData.refresh_token)
-  redirectUrl.searchParams.set('expires_in', tokenData.expires_in.toString()) // Ensure it's a string
+  console.log('Got Spotify token data:', tokenData)
 
-  return NextResponse.redirect(redirectUrl)
+  // 🧠 Fetch current Supabase session
+  const supabaseClient = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    { auth: { persistSession: false } }
+  )
+
+  const {
+    data: { session },
+  } = await supabaseClient.auth.getSession()
+
+  if (!session?.user?.id) {
+    console.error('No active Supabase session found.')
+    return NextResponse.redirect('http://localhost:3000/login?error=session')
+  }
+
+  const userId = session.user.id
+
+  console.log('Updating user ID:', userId)
+
+  // 🛠 Update user using ADMIN privileges
+  const { error: updateError } = await supabaseAdmin.auth.admin.updateUserById(userId, {
+    user_metadata: {
+      spotify_access_token: tokenData.access_token,
+      spotify_refresh_token: tokenData.refresh_token,
+      spotify_expires_at: Math.floor(Date.now() / 1000) + tokenData.expires_in,
+    },
+  })
+
+  if (updateError) {
+    console.error('Failed to update user metadata:', updateError)
+    return NextResponse.redirect('http://localhost:3000/login?error=update_metadata')
+  }
+
+  console.log('✅ Successfully updated user metadata')
+
+  // Finally redirect to /loggedin clean
+  return NextResponse.redirect('http://localhost:3000/loggedin')
 }
