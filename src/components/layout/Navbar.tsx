@@ -8,7 +8,7 @@ import { supabase } from '@/lib/supabase'
 import { useRouter } from 'next/navigation'
 
 export default function Navbar() {
-  const { user } = useUser()
+  const { user, loading } = useUser()
   const router = useRouter()
 
   const handleLogout = async () => {
@@ -33,14 +33,17 @@ export default function Navbar() {
           >
             <HomeIcon className='w-5 h-5' /> <span>Home</span>
           </Link>
-          <Link
-            href='/profile'
-            className='font-bold text-orange-500 flex items-center gap-1 hover:text-orange-300'
-          >
-            <UserIcon className='w-5 h-5' /> <span>Profile</span>
-          </Link>
 
-          {user ? (
+          {!loading && user && (
+            <Link
+              href='/profile'
+              className='font-bold text-orange-500 flex items-center gap-1 hover:text-orange-300'
+            >
+              <UserIcon className='w-5 h-5' /> <span>Profile</span>
+            </Link>
+          )}
+
+          {!loading && user ? (
             <Button
               onClick={handleLogout}
               className='bg-gradient-to-t from-red-700 to-orange-400 flex items-center gap-1 hover:brightness-130 text-white cursor-pointer'

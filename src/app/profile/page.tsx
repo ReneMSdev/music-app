@@ -1,26 +1,20 @@
-'use client'
-
-import { useUser } from '@/lib/user-context'
-import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
+import { createServerSupabaseClient } from '@/utils/supabase/server'
+import { redirect } from 'next/navigation'
 import ProfileCard from './ProfileCard'
-import { LoadingSpinner } from '@/components/ui/loading-spinner'
 
-export default function ProfilePage() {
-  const { user, loading } = useUser()
-  const router = useRouter()
+export default async function ProfilePage() {
+  const supabase = createServerSupabaseClient()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
 
-  useEffect(() => {
-    if (!loading && !user) router.push('/login')
-  }, [user, loading, router])
-
-  if (loading) return <LoadingSpinner />
+  if (!user) {
+    redirect('/login')
+  }
 
   return (
-    <>
-      <div className='min-h-screen flex flex-col bg-stone-900 text-slate-300 mt-[100px]'>
-        <ProfileCard />
-      </div>
-    </>
+    <div className='min-h-screen flex flex-col bg-stone-900 text-slate-300 mt-[100px]'>
+      <ProfileCard />
+    </div>
   )
 }
