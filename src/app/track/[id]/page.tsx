@@ -2,7 +2,9 @@
 
 import { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
-import { Button } from '@/components/ui/button'
+import { Progress } from '@/components/ui/progress'
+import { FaRandom, FaStepBackward, FaPlayCircle, FaStepForward } from 'react-icons/fa'
+import { FaRepeat, FaCirclePause } from 'react-icons/fa6'
 
 type TrackData = {
   name: string
@@ -58,49 +60,77 @@ export default function TrackPage() {
   const durationSeconds = Math.floor((track.duration_ms % 60000) / 1000)
 
   return (
-    <div className='min-h-screen bg-slate-900 text-white flex flex-col items-center p-6'>
-      {/* Track Info Card */}
-      <div className='flex flex-col items-center bg-slate-800 p-6 rounded-xl max-w-md w-full shadow-lg'>
-        <img
-          src={track.album.images[0]?.url || '/placeholder-image.png'}
-          alt={track.album.name}
-          className='w-64 h-64 object-cover rounded-lg'
-        />
-        <div className='text-center mt-6'>
-          <p className='text-sm text-gray-400'>Song</p>
-          <h1 className='text-4xl font-extrabold mt-2'>{track.name}</h1>
-          <p className='mt-2 text-gray-400'>
-            <span className='font-semibold'>
-              {track.artists.map((artist) => artist.name).join(', ')}
-            </span>{' '}
-            • {track.album.name} • {track.album.release_date.slice(0, 4)} • {durationMinutes}:
-            {durationSeconds.toString().padStart(2, '0')}
-          </p>
+    <>
+      <div className='min-h-screen bg-slate-900 text-white flex flex-col items-center p-6 mt-15'>
+        {/* Track Info Card */}
+        <div className='flex flex-col lg:flex-row items-center lg:items-end bg-slate-800 p-6 rounded-xl shadow-lg max-w-4xl w-full gap-8'>
+          {/* Left: Album Cover */}
+          <img
+            src={track.album.images[0]?.url || '/placeholder-image.png'}
+            alt={track.album.name}
+            className='w-48 h-48 object-cover rounded-lg'
+          />
+
+          {/* Right: Track Info */}
+          <div className='flex flex-col justify-end items-start text-left'>
+            <p className='text-sm text-gray-400'>Song</p>
+            <h1 className='text-4xl font-extrabold mt-2'>{track.name}</h1>
+            <p className='mt-2 text-gray-400'>
+              <span className='font-semibold'>
+                {track.artists.map((artist) => artist.name).join(', ')}
+              </span>{' '}
+              • {track.album.name} • {track.album.release_date.slice(0, 4)} • {durationMinutes}:
+              {durationSeconds.toString().padStart(2, '0')}
+            </p>
+          </div>
         </div>
       </div>
 
-      {/* Music Controls */}
-      <div className='mt-10 w-full max-w-md flex flex-col items-center space-y-4'>
-        {/* Progress bar (static for now) */}
-        <div className='w-full bg-gray-700 h-2 rounded-full overflow-hidden'>
-          <div
-            className='bg-green-500 h-2'
-            style={{ width: playing ? '30%' : '0%' }}
-          ></div>
-        </div>
+      <div className='fixed bottom-0 w-full bg-slate-900 p-5 z-50'>
+        <div className='max-w-4xl mx-auto flex flex-col items-center justify-center'>
+          {/* Control Buttons */}
+          <div className='flex items-center justify-center gap-8'>
+            <button
+              className='text-gray-400 hover:text-white transition-colors cursor-pointer'
+              onClick={() => console.log('Shuffle')}
+            >
+              <FaRandom size={16} />
+            </button>
+            <button
+              className='text-gray-400 hover:text-white transition-colors cursor-pointer'
+              onClick={() => console.log('Rewind')}
+            >
+              <FaStepBackward size={18} />
+            </button>
+            <button
+              className='text-gray-400 hover:text-white transition-colors cursor-pointer'
+              onClick={() => setPlaying(!playing)}
+            >
+              {playing ? <FaCirclePause size={24} /> : <FaPlayCircle size={24} />}
+            </button>
+            <button
+              className='text-gray-400 hover:text-white transition-colors cursor-pointer'
+              onClick={() => console.log('Fast Forward')}
+            >
+              <FaStepForward size={18} />
+            </button>
+            <button
+              className='text-gray-400 hover:text-white transition-colors cursor-pointer'
+              onClick={() => console.log('Repeat')}
+            >
+              <FaRepeat size={16} />
+            </button>
+          </div>
 
-        {/* Control buttons */}
-        <div className='flex items-center space-x-6 mt-4'>
-          <Button variant='outline'>⏮️</Button>
-          <Button
-            onClick={() => setPlaying(!playing)}
-            className='bg-green-500 hover:bg-green-600 text-white text-xl px-6 py-3 rounded-full'
-          >
-            {playing ? '⏸️' : '▶️'}
-          </Button>
-          <Button variant='outline'>⏭️</Button>
+          {/* Progress bar */}
+          <div className='w-full mt-4 flex justify-center'>
+            <Progress
+              value={40}
+              className='h-1 bg-slate-700 w-full max-w-lg [&>div]:bg-white'
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
