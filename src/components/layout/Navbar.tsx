@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import { useUser } from '@/lib/user-context'
 import { supabase } from '@/lib/supabase'
 import { useRouter } from 'next/navigation'
+import { Input } from '@/components/ui/input'
 
 export default function Navbar() {
   const { user, loading } = useUser()
@@ -26,6 +27,17 @@ export default function Navbar() {
         >
           YourSound<span className='text-sm align-top ml-1'>™</span>
         </Link>
+
+        {/* Search Input */}
+        <div className='flex-1 px-6 hidden md:block'>
+          <Input
+            type='text'
+            placeholder='Search songs, artists, albums...'
+            className='bg-slate-800 text-white placeholder:text-slate-400 border-0 focus-visible:ring-orange-500'
+          />
+        </div>
+
+        {/* Nav Links */}
         <nav className='flex items-center gap-6'>
           <Link
             href='/'
