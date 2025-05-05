@@ -68,7 +68,7 @@ export default function TrackPage() {
           <img
             src={track.album.images[0]?.url || '/placeholder-image.png'}
             alt={track.album.name}
-            className='w-48 h-48 object-cover rounded-lg'
+            className='w-40 h-40 object-cover rounded-lg'
           />
 
           {/* Right: Track Info */}
