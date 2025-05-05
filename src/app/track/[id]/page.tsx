@@ -25,20 +25,7 @@ export default function TrackPage() {
   useEffect(() => {
     const fetchTrack = async () => {
       try {
-        // Assume you have the access token stored in localStorage or state
-        const accessToken = localStorage.getItem('spotifyAccessToken')
-        console.log('Access Token:', accessToken)
-
-        if (!accessToken) {
-          console.error('Missing access token')
-          return
-        }
-
-        const res = await fetch(`https://api.spotify.com/v1/tracks/${id}`, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        })
+        const res = await fetch(`/api/spotify/track/${id}`)
 
         if (!res.ok) {
           throw new Error('Failed to fetch track info')
