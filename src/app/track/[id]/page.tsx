@@ -61,31 +61,79 @@ export default function TrackPage() {
 
   return (
     <>
-      <div className='min-h-screen bg-slate-900 text-white flex flex-col items-center p-6 mt-15'>
-        {/* Track Info Card */}
-        <div className='flex flex-col lg:flex-row items-center lg:items-end bg-slate-800 p-6 rounded-xl shadow-lg max-w-4xl w-full gap-8'>
-          {/* Left: Album Cover */}
-          <img
-            src={track.album.images[0]?.url || '/placeholder-image.png'}
-            alt={track.album.name}
-            className='w-40 h-40 object-cover rounded-lg'
-          />
+      <div className='w-full bg-slate-900 flex flex-col items-center px-4'>
+        <div className='min-h-screen text-white flex flex-col items-center p-6 mt-15'>
+          {/* Track Info Card */}
+          <div className='flex flex-col lg:flex-row items-center lg:items-end bg-slate-800 p-6 rounded-xl shadow-lg max-w-4xl w-full gap-8'>
+            {/* Left: Album Cover */}
+            <img
+              src={track.album.images[0]?.url || '/placeholder-image.png'}
+              alt={track.album.name}
+              className='w-40 h-40 object-cover rounded-lg'
+            />
 
-          {/* Right: Track Info */}
-          <div className='flex flex-col justify-end items-start text-left'>
-            <p className='text-sm text-gray-400'>Song</p>
-            <h1 className='text-4xl font-extrabold mt-2'>{track.name}</h1>
-            <p className='mt-2 text-gray-400'>
-              <span className='font-semibold'>
-                {track.artists.map((artist) => artist.name).join(', ')}
-              </span>{' '}
-              • {track.album.name} • {track.album.release_date.slice(0, 4)} • {durationMinutes}:
-              {durationSeconds.toString().padStart(2, '0')}
-            </p>
+            {/* Right: Track Info */}
+            <div className='flex flex-col justify-end items-start text-left'>
+              <p className='text-sm text-gray-400'>Song</p>
+              <h1 className='text-4xl font-extrabold mt-2'>{track.name}</h1>
+              <p className='mt-2 text-gray-400'>
+                <span className='font-semibold'>
+                  {track.artists.map((artist) => artist.name).join(', ')}
+                </span>{' '}
+                • {track.album.name} • {track.album.release_date.slice(0, 4)} • {durationMinutes}:
+                {durationSeconds.toString().padStart(2, '0')}
+              </p>
+            </div>
+          </div>
+
+          {/* Karaoke Lyrics Scroll Section */}
+          <div className={'max-w-4xl w-full mt-4'}>
+            <div className='bg-slate-800 rounded-lg p-6 h-[45vh] overflow-y-auto shadow-inner mt-4 justify-center'>
+              <div className='space-y-6'>
+                {/* Single line block */}
+                <div>
+                  <p className='text-white text-xl font-semibold leading-snug'>
+                    Big body take both lanes
+                  </p>
+                  <p className='text-gray-400 text-md italic leading-tight'>
+                    Gran cuerpo ocupa ambos carriles
+                  </p>
+                </div>
+
+                <div>
+                  <p className='text-white text-xl font-semibold leading-snug'>
+                    Backseat blowin' propane
+                  </p>
+                  <p className='text-gray-400 text-md italic leading-tight'>
+                    Asiento trasero soplando propano
+                  </p>
+                </div>
+
+                <div>
+                  <p className='text-white text-xl font-semibold leading-snug'>
+                    All black, five gold chains
+                  </p>
+                  <p className='text-gray-400 text-md italic leading-tight'>
+                    Todo negro, cinco cadenas de oro
+                  </p>
+                </div>
+
+                <div>
+                  <p className='text-white text-xl font-semibold leading-snug'>
+                    Young rich bossed up on his own mayne
+                  </p>
+                  <p className='text-gray-400 text-md italic leading-tight'>
+                    Joven rico que se hizo solo, compa
+                  </p>
+                </div>
+              </div>
+              {/* ...repeat for more lines */}
+            </div>
           </div>
         </div>
       </div>
 
+      {/* Bottom Control Bar */}
       <div className='fixed bottom-0 w-full bg-slate-900 p-5 z-50'>
         <div className='max-w-4xl mx-auto flex flex-col items-center justify-center'>
           {/* Control Buttons */}
