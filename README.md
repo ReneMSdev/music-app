@@ -15,7 +15,7 @@ YourSound™ connects to your Spotify Premium account and instantly translates t
 
 * Recently Played Tracks pulled from your Spotify history
 
-* Single Track View with full audio playback support
+* Single Track View with front-end built for track player
 
 * Responsive UI built with Tailwind CSS and shadcn/ui
 
