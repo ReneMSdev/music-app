@@ -26,5 +26,29 @@ YourSound™ connects to your Spotify Premium account and instantly translates t
 
 * Synced Playback + Translation Overlay (maintain rhythm/cadence)
 
-## Project Structure (Partial)
-<pre> src/ ├── app/ │ ├── api/ │ │ ├── auth/route.ts │ │ └── spotify/ │ │ ├── callback/route.ts │ │ ├── login/route.ts │ │ ├── playing/route.ts │ │ ├── recently-played/route.ts │ │ └── track/[id]/route.ts │ ├── login/ │ │ ├── login-form.tsx │ │ └── page.tsx │ ├── signup/ │ │ ├── signup-form.tsx │ │ └── page.tsx │ ├── track/[id]/page.tsx │ ├── loggedin/page.tsx │ ├── profile/ │ │ ├── ProfileCard.tsx │ │ └── page.tsx │ └── page.tsx (Landing) ├── components/ │ ├── landing/LandingHero.tsx │ ├── spotify/RecentlyPlayed.tsx │ ├── layout/ │ │ ├── AppLayout.tsx │ │ └── Navbar.tsx │ ├── profile/EditProfileModal.tsx │ └── ui/ │ ├── button.tsx │ ├── card.tsx │ ├── input.tsx │ ├── dialog.tsx │ ├── loading-spinner.tsx │ └── avatar.tsx ├── lib/ │ ├── auth.ts │ ├── spotify.ts │ ├── supabase.ts │ ├── user-context.tsx │ └── utils.ts ├── middleware.ts └── utils/supabase/ ├── client.ts ├── middleware.ts └── server.ts </pre>
+## Project Structure Overview
+This project follows a modular structure using Next.js App Router with organized folders for API routes, pages, components, and shared libraries:
+
+* /app – Handles all routes and pages including:
+
+** /login, /signup, /profile, and /track/[id]
+
+** API routes under /api for Spotify and auth flows
+
+* /components – Reusable UI and feature components, grouped by feature:
+
+** landing/, spotify/, layout/, profile/, and ui/
+
+* /lib – Shared logic for:
+
+** Supabase client setup
+
+** Spotify API helpers
+
+** Auth utilities
+
+* /utils/supabase – Server-side Supabase helpers and middleware
+
+* middleware.ts – Used to protect routes and handle auth logic
+
+
