@@ -3,12 +3,12 @@ import { redirect } from 'next/navigation'
 import ProfileCard from './ProfileCard'
 
 export default async function ProfilePage() {
-  const supabase = createServerSupabaseClient()
+  const supabase = await createServerSupabaseClient()
   const {
-    data: { user },
-  } = await supabase.auth.getUser()
+    data: { session },
+  } = await supabase.auth.getSession()
 
-  if (!user) {
+  if (!session?.user) {
     redirect('/login')
   }
 

@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 import { Progress } from '@/components/ui/progress'
-import { FaRandom, FaStepBackward, FaPlayCircle, FaStepForward } from 'react-icons/fa'
+import { FaRandom, FaStepBackward, FaPlayCircle, FaStepForward, FaLanguage } from 'react-icons/fa'
 import { FaRepeat, FaCirclePause } from 'react-icons/fa6'
 
 type TrackData = {
@@ -61,7 +61,7 @@ export default function TrackPage() {
 
   return (
     <>
-      <div className='w-full bg-slate-900 flex flex-col items-center px-4'>
+      <div className='w-full flex flex-col items-center px-4'>
         <div className='min-h-screen text-white flex flex-col items-center p-6 mt-15'>
           {/* Track Info Card */}
           <div className='flex flex-col lg:flex-row items-center lg:items-end bg-slate-800 p-6 rounded-xl shadow-lg max-w-4xl w-full gap-8'>
@@ -93,37 +93,37 @@ export default function TrackPage() {
                 {/* Single line block */}
                 <div>
                   <p className='text-white text-xl font-semibold leading-snug'>
-                    Big body take both lanes
+                    Yo sé que esto no volverá a pasar
                   </p>
                   <p className='text-gray-400 text-md italic leading-tight'>
-                    Gran cuerpo ocupa ambos carriles
+                    I know this will never happen again
                   </p>
                 </div>
 
                 <div>
                   <p className='text-white text-xl font-semibold leading-snug'>
-                    Backseat blowin' propane
+                    Pero si volviera a pasar
                   </p>
                   <p className='text-gray-400 text-md italic leading-tight'>
-                    Asiento trasero soplando propano
+                    But if it were to happen again
                   </p>
                 </div>
 
                 <div>
                   <p className='text-white text-xl font-semibold leading-snug'>
-                    All black, five gold chains
+                    Sé que sería tu debilidad
                   </p>
                   <p className='text-gray-400 text-md italic leading-tight'>
-                    Todo negro, cinco cadenas de oro
+                    I know it would be your weakness
                   </p>
                 </div>
 
                 <div>
                   <p className='text-white text-xl font-semibold leading-snug'>
-                    Young rich bossed up on his own mayne
+                    Porque la noche de anoche fue
                   </p>
                   <p className='text-gray-400 text-md italic leading-tight'>
-                    Joven rico que se hizo solo, compa
+                    Because last night was
                   </p>
                 </div>
               </div>
@@ -134,7 +134,7 @@ export default function TrackPage() {
       </div>
 
       {/* Bottom Control Bar */}
-      <div className='fixed bottom-0 w-full bg-slate-900 p-5 z-50'>
+      <div className='fixed bottom-0 w-full  p-5 z-50'>
         <div className='max-w-4xl mx-auto flex flex-col items-center justify-center'>
           {/* Control Buttons */}
           <div className='flex items-center justify-center gap-8'>
@@ -166,7 +166,7 @@ export default function TrackPage() {
               className='text-gray-400 hover:text-white transition-colors cursor-pointer'
               onClick={() => console.log('Repeat')}
             >
-              <FaRepeat size={16} />
+              <FaLanguage size={28} />
             </button>
           </div>
 

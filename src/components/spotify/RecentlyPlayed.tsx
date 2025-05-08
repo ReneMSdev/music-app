@@ -91,7 +91,7 @@ export function RecentlyPlayed({ accessToken }: { accessToken: string }) {
 
   if (!tracks.length && !error) {
     // Show loading or no tracks message appropriately
-    return <p className='p-4'>Loading recently played tracks or none found...</p>
+    return <p className='p-4'>Loading recently played tracks ...</p>
   }
 
   return (
