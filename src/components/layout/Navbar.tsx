@@ -6,9 +6,10 @@ import { Button } from '@/components/ui/button'
 import { useUser } from '@/lib/user-context'
 import { supabase } from '@/lib/supabase'
 import { useRouter } from 'next/navigation'
+import { Input } from '@/components/ui/input'
 
 export default function Navbar() {
-  const { user } = useUser()
+  const { user, loading } = useUser()
   const router = useRouter()
 
   const handleLogout = async () => {
@@ -26,6 +27,17 @@ export default function Navbar() {
         >
           YourSound<span className='text-sm align-top ml-1'>™</span>
         </Link>
+
+        {/* Search Input */}
+        <div className='flex-1 px-6 hidden md:block'>
+          <Input
+            type='text'
+            placeholder='Search songs, artists, albums...'
+            className='bg-slate-800 text-white placeholder:text-slate-400 border-0 focus-visible:ring-orange-500'
+          />
+        </div>
+
+        {/* Nav Links */}
         <nav className='flex items-center gap-6'>
           <Link
             href='/'
@@ -33,14 +45,17 @@ export default function Navbar() {
           >
             <HomeIcon className='w-5 h-5' /> <span>Home</span>
           </Link>
-          <Link
-            href='/profile'
-            className='font-bold text-orange-500 flex items-center gap-1 hover:text-orange-300'
-          >
-            <UserIcon className='w-5 h-5' /> <span>Profile</span>
-          </Link>
 
-          {user ? (
+          {!loading && user && (
+            <Link
+              href='/profile'
+              className='font-bold text-orange-500 flex items-center gap-1 hover:text-orange-300'
+            >
+              <UserIcon className='w-5 h-5' /> <span>Profile</span>
+            </Link>
+          )}
+
+          {!loading && user ? (
             <Button
               onClick={handleLogout}
               className='bg-gradient-to-t from-red-700 to-orange-400 flex items-center gap-1 hover:brightness-130 text-white cursor-pointer'

@@ -40,7 +40,7 @@ export function LoginForm({ className, ...props }: React.ComponentProps<'div'>) 
       className={cn('mt-[80px] flex flex-col items-center px-4', className)}
       {...props}
     >
-      <Card className='w-full bg-slate-900 text-slate-300 border-2 border-orange-500'>
+      <Card className='w-full bg-slate-900 text-slate-300 border-2 border-orange-500 py-6'>
         <CardHeader>
           <CardTitle className='text-center text-2xl font-extrabold '>
             Login to your account
