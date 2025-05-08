@@ -25,3 +25,6 @@ YourSound™ connects to your Spotify Premium account and instantly translates t
 * Language Translation of lyrics (choose your target language)
 
 * Synced Playback + Translation Overlay (maintain rhythm/cadence)
+
+## Project Structure (Partial)
+<pre> src/ ├── app/ │ ├── api/ │ │ ├── auth/route.ts │ │ └── spotify/ │ │ ├── callback/route.ts │ │ ├── login/route.ts │ │ ├── playing/route.ts │ │ ├── recently-played/route.ts │ │ └── track/[id]/route.ts │ ├── login/ │ │ ├── login-form.tsx │ │ └── page.tsx │ ├── signup/ │ │ ├── signup-form.tsx │ │ └── page.tsx │ ├── track/[id]/page.tsx │ ├── loggedin/page.tsx │ ├── profile/ │ │ ├── ProfileCard.tsx │ │ └── page.tsx │ └── page.tsx (Landing) ├── components/ │ ├── landing/LandingHero.tsx │ ├── spotify/RecentlyPlayed.tsx │ ├── layout/ │ │ ├── AppLayout.tsx │ │ └── Navbar.tsx │ ├── profile/EditProfileModal.tsx │ └── ui/ │ ├── button.tsx │ ├── card.tsx │ ├── input.tsx │ ├── dialog.tsx │ ├── loading-spinner.tsx │ └── avatar.tsx ├── lib/ │ ├── auth.ts │ ├── spotify.ts │ ├── supabase.ts │ ├── user-context.tsx │ └── utils.ts ├── middleware.ts └── utils/supabase/ ├── client.ts ├── middleware.ts └── server.ts </pre>
