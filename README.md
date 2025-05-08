@@ -29,21 +29,21 @@ YourSound™ connects to your Spotify Premium account and instantly translates t
 
 ## Screenshots
 
-### Hero Landing Page
+Hero Landing Page
 
-![Hero Screenshot][/screenshots/hero.png]
+![Hero Screenshot][./screenshots/hero.png]
 
-### SignUp Form
+SignUp Form
 
-![Sign Up Screenshot][/screenshots/signup.png]
+![Sign Up Screenshot][./screenshots/signup.png]
 
-### Recently Played
+Recently Played
 
-![Recently Played Screenshot][/screenshots/recently-played.png]
+![Recently Played Screenshot][./screenshots/recently-played.png]
 
-### Single Track Player
+Single Track Player
 
-![Single Track Screenshot][/screenshots/track-id.png]
+![Single Track Screenshot][./screenshots/track-id.png]
 
 ## Project Structure Overview
 
