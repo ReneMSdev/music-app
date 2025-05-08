@@ -31,21 +31,21 @@ This project follows a modular structure using Next.js App Router with organized
 
 * /app – Handles all routes and pages including:
 
-** /login, /signup, /profile, and /track/[id]
+  * /login, /signup, /profile, and /track/[id]
 
-** API routes under /api for Spotify and auth flows
+  * API routes under /api for Spotify and auth flows
 
 * /components – Reusable UI and feature components, grouped by feature:
 
-** landing/, spotify/, layout/, profile/, and ui/
+  * landing/, spotify/, layout/, profile/, and ui/
 
 * /lib – Shared logic for:
 
-** Supabase client setup
+  * Supabase client setup
 
-** Spotify API helpers
+  * Spotify API helpers
 
-** Auth utilities
+  * Auth utilities
 
 * /utils/supabase – Server-side Supabase helpers and middleware
 
