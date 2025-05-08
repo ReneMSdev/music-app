@@ -9,46 +9,64 @@ YourSound™ connects to your Spotify Premium account and instantly translates t
 
 ✅ Built So Far
 
-* User Authentication with Supabase (Sign Up / Login / OAuth)
+- User Authentication with Supabase (Sign Up / Login / OAuth)
 
-* Spotify Integration (Premium only) using OAuth 2.0
+- Spotify Integration (Premium only) using OAuth 2.0
 
-* Recently Played Tracks pulled from your Spotify history
+- Recently Played Tracks pulled from your Spotify history
 
-* Single Track View with front-end built for track player
+- Single Track View with front-end built for track player
 
-* Responsive UI built with Tailwind CSS and shadcn/ui
+- Responsive UI built with Tailwind CSS and shadcn/ui
 
 🛠️ In Progress / To Do
-* Lyric Fetching from selected tracks
 
-* Language Translation of lyrics (choose your target language)
+- Lyric Fetching from selected tracks
 
-* Synced Playback + Translation Overlay (maintain rhythm/cadence)
+- Language Translation of lyrics (choose your target language)
+
+- Synced Playback + Translation Overlay (maintain rhythm/cadence)
+
+## Screenshots
+
+### Hero Landing Page
+
+![Hero Screenshot][/screenshots/hero.png]
+
+### SignUp Form
+
+![Sign Up Screenshot][/screenshots/signup.png]
+
+### Recently Played
+
+![Recently Played Screenshot][/screenshots/recently-played.png]
+
+### Single Track Player
+
+![Single Track Screenshot][/screenshots/track-id.png]
 
 ## Project Structure Overview
+
 This project follows a modular structure using Next.js App Router with organized folders for API routes, pages, components, and shared libraries:
 
-* /app – Handles all routes and pages including:
+- /app – Handles all routes and pages including:
 
-  * /login, /signup, /profile, and /track/[id]
+  - /login, /signup, /profile, and /track/[id]
 
-  * API routes under /api for Spotify and auth flows
+  - API routes under /api for Spotify and auth flows
 
-* /components – Reusable UI and feature components, grouped by feature:
+- /components – Reusable UI and feature components, grouped by feature:
 
-  * landing/, spotify/, layout/, profile/, and ui/
+  - landing/, spotify/, layout/, profile/, and ui/
 
-* /lib – Shared logic for:
+- /lib – Shared logic for:
 
-  * Supabase client setup
+  - Supabase client setup
 
-  * Spotify API helpers
+  - Spotify API helpers
 
-  * Auth utilities
+  - Auth utilities
 
-* /utils/supabase – Server-side Supabase helpers and middleware
+- /utils/supabase – Server-side Supabase helpers and middleware
 
-* middleware.ts – Used to protect routes and handle auth logic
-
-
+- middleware.ts – Used to protect routes and handle auth logic
