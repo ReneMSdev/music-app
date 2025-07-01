@@ -1,6 +1,6 @@
 ![music](https://github.com/user-attachments/assets/75620846-4d4b-4d79-9e49-383bc678e5c6)
 
-## YourSound™: Real-Time Music Translation App
+## YourSound™ | Real-Time Music Translation App
 
 Understand music across borders.
 YourSound™ connects to your Spotify Premium account and instantly translates the lyrics of songs you're currently listening to — all while preserving rhythm and flow. Whether you're learning a new language, exploring international artists, or just vibing to global sounds, YourSound™ makes it easier to feel the meaning behind the music.
